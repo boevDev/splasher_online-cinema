@@ -32,5 +32,6 @@ export default {
 
 Run:
 
-client: npm run dev
-server: json-server --watch db.json# splasher_online-cinema
+client-run: npm run dev
+
+server-run: json-server --watch db.json
