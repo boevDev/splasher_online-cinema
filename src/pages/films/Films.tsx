@@ -12,7 +12,7 @@ const Films: React.FC = () => {
 
   useEffect(() => {
     api
-      .get('http://localhost:8080/films?_sort=released&_order=desc')
+      .get('/films?_sort=released&_order=desc')
       .then((response) => {
         setFilms(response.data);
       })

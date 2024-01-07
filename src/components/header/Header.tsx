@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 const Header: React.FC = () => {
   return (
     <header className='w-full bg-primary-200'>
-      <div className='w-[calc(100%-16px)] max-w-screen-2xl mx-auto py-4 flex flex-row justify-between items-center'>
+      <div className='w-[calc(100%-16px)] max-w-screen-2xl mx-auto py-4 px-2 flex flex-row justify-between items-center'>
         <div className='flex flex-row justify-between gap-4 items-center'>
           <a href='/'>
             <Logo className='w-64' />
