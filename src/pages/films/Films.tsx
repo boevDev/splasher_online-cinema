@@ -1,27 +1,29 @@
-import { api } from '@/api';
 import Card from '@/components/card/Card';
 import Filters from '@/components/filters/Filters';
 import Path from '@/components/path/Path';
 import Preloader from '@/components/preloader/Preloader';
 import Sorting from '@/components/sorting/Sorting';
-import { TFilms } from '@/types';
-import { useEffect, useState } from 'react';
+import { fetchDataFilms } from '@/store/films/films.slice';
+import { AppDispatch, RootState } from '@/store/store';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Films: React.FC = () => {
-  const [films, setFilms] = useState<null | TFilms[]>(null);
+  const films = useSelector((state: RootState) => state.dataFilms.data);
+  const isLoading = useSelector(
+    (state: RootState) => state.dataFilms.isLoading
+  );
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    api
-      .get('/films?_sort=released&_order=desc')
-      .then((response) => {
-        setFilms(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    dispatch(fetchDataFilms());
+  }, [dispatch]);
 
-  return films ? (
+  return isLoading ? (
+    <div className='flex flex-col justify-center items-center w-full h-[90vh]'>
+      <Preloader />
+    </div>
+  ) : (
     <div className='w-[calc(100%-16px)] max-w-screen-2xl mx-auto px-2'>
       <div className='mt-4'>
         <Path />
@@ -40,10 +42,6 @@ const Films: React.FC = () => {
             })}
         </div>
       </div>
-    </div>
-  ) : (
-    <div className='flex flex-col justify-center items-center w-full h-[90vh]'>
-      <Preloader />
     </div>
   );
 };
