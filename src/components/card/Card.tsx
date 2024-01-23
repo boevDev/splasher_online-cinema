@@ -1,14 +1,10 @@
 import { TFilms } from '@/types';
-import { Link } from 'react-router-dom';
 
 const Card: React.FC<TFilms> = (props) => {
   const { image, name, rating, released, duration } = props;
 
   return (
-    <Link
-      to='/films'
-      className='flex flex-col w-48 gap-2 p-2 rounded-lg relative hover:scale-105 transition-all'
-    >
+    <div className='flex flex-col w-48 gap-2 p-2 rounded-lg relative hover:scale-105 transition-all'>
       <img className='rounded-lg h-64 object-cover' src={image} alt='img' />
       <div className='font-semibold font-monts  whitespace-nowrap text-ellipsis overflow-hidden'>
         {name}
@@ -19,7 +15,7 @@ const Card: React.FC<TFilms> = (props) => {
       <div className='text-sm text-white/50 font-monts font-semibold'>
         {released}, {duration} мин.
       </div>
-    </Link>
+    </div>
   );
 };
 
